@@ -134,7 +134,7 @@ interface OnPopSeekBarChangeListener {
 > There is a lot properties in popSeekBar
 
 ```xml
- <declare-styleable name="PopSeekBar">
+    <declare-styleable name="PopSeekBar">
         <attr name="progressSolidColor" format="color"/>
         <attr name="progressStartSolidColor" format="color"/>
         <attr name="progressEndSolidColor" format="color"/>
@@ -209,7 +209,7 @@ interface OnPopSeekBarChangeListener {
 
 ```groovy
 	dependencies {
-	        implementation 'com.github.popkter.PopLib:ViewLib:0.151'
+	        implementation 'com.github.popkter:SeekBar:0.1'
 	}
 ```
 
@@ -227,4 +227,4 @@ interface OnPopSeekBarChangeListener {
 
 ### Power By
 
-[![](https://jitpack.io/v/popkter/PopLib.svg)](https://jitpack.io/#popkter/PopLib)
+[![](https://jitpack.io/v/popkter/SeekBar.svg)](https://jitpack.io/#popkter/SeekBar)
