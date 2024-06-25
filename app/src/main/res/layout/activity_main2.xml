@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main2Activity">
+
+    <com.pop.seekbar.PopSeekBar
+        android:id="@+id/seekbar1"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        app:progressSolidColor="@color/black"
+        app:trackSolidColor="#FF5722"
+        app:commonRadius="20dp"
+        android:paddingStart="30dp"
+        app:overStretchEnable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/progressTv1"
+        android:layout_width="50dp"
+        android:text="0"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/seekbar1"
+        app:layout_constraintEnd_toEndOf="@id/seekbar1"
+        app:layout_constraintTop_toTopOf="@id/seekbar1" />
+
+
+    <com.pop.seekbar.PopSeekBar
+        android:id="@+id/seekbar"
+        android:paddingStart="10dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="30dp"
+        android:layout_width="100dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        app:progressStartSolidColor="#FF5722"
+        app:progressEndSolidColor="@android:color/transparent"
+        app:progressGradientAngle="270"
+        app:progressSolidColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:trackSolidColor="#CCFFFFFF"
+        app:trackRadius="20dp"
+        app:orientation="vertical"
+        app:naturalProcess="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/muteIv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon_navigation_media_selector"
+        app:layout_constraintBottom_toBottomOf="@id/seekbar"
+        app:layout_constraintStart_toStartOf="@id/seekbar"
+        app:layout_constraintEnd_toEndOf="@id/seekbar"/>
+
+    <TextView
+        android:id="@+id/progressTv"
+        android:layout_width="50dp"
+        android:text="0"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/seekbar"
+        app:layout_constraintStart_toStartOf="@id/seekbar"
+        app:layout_constraintEnd_toEndOf="@id/seekbar" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
