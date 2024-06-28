@@ -66,5 +66,6 @@
             <enum name="leftBottom2rightTop" value="225" />
             <enum name="rightBottom2leftTop" value="315" />
         </attr>
+        <attr name="progressBorder" format="dimension" />
     </declare-styleable>
 </resources>

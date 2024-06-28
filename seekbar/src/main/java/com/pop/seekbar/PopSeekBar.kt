@@ -9,6 +9,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PointF
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -37,6 +38,7 @@ class PopSeekBar : View {
     private lateinit var trackPaint: Paint
     private lateinit var trackColors: IntArray
     private lateinit var trackPath: Path
+    private lateinit var trackPathShadow: Path
     private var trackGradientType: Int = 0
     private var trackGradientAngle: Int = 0
     private var trackRadius: Float = 0F
@@ -93,6 +95,8 @@ class PopSeekBar : View {
 
     var min: Int = 0
 
+    var progressBorder = 0
+
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         initView(attrs)
     }
@@ -144,6 +148,13 @@ class PopSeekBar : View {
 
         overStretchEnable = typeArray.getBoolean(R.styleable.PopSeekBar_overStretchEnable, true)
 
+        progressBorder = typeArray.getDimension(R.styleable.PopSeekBar_progressBorder, 0F).toInt()
+
+        if (progressBorder < 0F) {
+            progressBorder = 0
+            Log.e(TAG, "ExceptionInInitializerError: progressBorder must be positive")
+        }
+
         trackPath = Path()
         trackPaint = Paint().apply {
             style = Paint.Style.FILL
@@ -161,6 +172,7 @@ class PopSeekBar : View {
                 color = progressSolidColor
             }
         }
+        trackPathShadow = Path()
         finalPath = Path()
         typeArray.recycle()
     }
@@ -179,6 +191,15 @@ class PopSeekBar : View {
             height.toFloat(),
             if (trackRadius == 0F) commonRadius else trackRadius
         )
+
+        trackPathShadow.drawTrackPath(
+            0F + progressBorder,
+            0F + progressBorder,
+            width.toFloat() - progressBorder,
+            height.toFloat() - progressBorder,
+            if (trackRadius == 0F) commonRadius else trackRadius
+        )
+
         if (trackColors.any { it != 0 }) {
             trackPaint.setGradientShader(
                 0F,
@@ -200,19 +221,19 @@ class PopSeekBar : View {
             val progressWidth = width * (mProgress.toFloat() / max)
             if (naturalProcess) {
                 progressPath.drawHorizontalProgressPathNatural(
-                    0F,
-                    0F,
-                    width.toFloat(),
-                    height.toFloat(),
+                    0F + progressBorder,
+                    0F + progressBorder,
+                    width.toFloat() - progressBorder,
+                    height.toFloat() - progressBorder,
                     if (progressRadius == 0F) commonRadius else progressRadius,
                     0F + progressWidth
                 )
             } else {
                 progressPath.drawHorizontalProgressPath(
-                    0F,
-                    0F,
-                    width.toFloat(),
-                    height.toFloat(),
+                    0F + progressBorder,
+                    0F + progressBorder,
+                    width.toFloat() - progressBorder,
+                    height.toFloat() - progressBorder,
                     if (progressRadius == 0F) commonRadius else progressRadius,
                     0F + progressWidth
                 )
@@ -221,19 +242,19 @@ class PopSeekBar : View {
             val progressHeight = height * (mProgress.toFloat() / max)
             if (naturalProcess) {
                 progressPath.drawVerticalProgressPathNatural(
-                    0F,
-                    0F,
-                    width.toFloat(),
-                    height.toFloat(),
+                    0F + progressBorder,
+                    0F + progressBorder,
+                    width.toFloat() - progressBorder,
+                    height.toFloat() - progressBorder,
                     if (progressRadius == 0F) commonRadius else progressRadius,
                     progressHeight
                 )
             } else {
                 progressPath.drawVerticalProgressPath(
-                    0F,
-                    0F,
-                    width.toFloat(),
-                    height.toFloat(),
+                    0F + progressBorder,
+                    0F + progressBorder,
+                    width.toFloat() - progressBorder,
+                    height.toFloat() - progressBorder,
                     if (progressRadius == 0F) commonRadius else progressRadius,
                     progressHeight
                 )
@@ -241,13 +262,13 @@ class PopSeekBar : View {
         }
 
         finalPath.reset()
-        finalPath.op(progressPath, trackPath, Path.Op.INTERSECT)
+        finalPath.op(progressPath, trackPathShadow, Path.Op.INTERSECT)
         if (progressColors.any { it != 0 }) {
             progressPaint.setGradientShader(
-                0F,
-                0F,
-                width.toFloat(),
-                height.toFloat(),
+                0F + progressBorder,
+                0F + progressBorder,
+                width.toFloat() - progressBorder,
+                height.toFloat() - progressBorder,
                 progressColors,
                 progressGradientType,
                 progressGradientAngle
