@@ -1,21 +1,11 @@
-package com.pop.demopanel.view
+package com.pop.seekbar
 
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Shader
-import android.os.Build.VERSION_CODES.P
-import android.util.Log
 
-fun Paint.setGradientShader(
-    left: Float,
-    top: Float,
-    right: Float,
-    bottom: Float,
-    colors: IntArray,
-    type: Int,
-    angle: Int
-) {
+fun Paint.setGradientShader(left: Float, top: Float, right: Float, bottom: Float, colors: IntArray, type: Int, angle: Int) {
 
     when (type) {
         0 -> {
@@ -71,8 +61,6 @@ fun Paint.setGradientShader(
 
 
 }
-
-
 
 fun Path.drawTrackPath(left: Float, top: Float, right: Float, bottom: Float, radius: Float) {
     reset()
@@ -164,7 +152,6 @@ fun Path.drawVerticalProgressPathNatural(left: Float, top: Float, right: Float, 
     close()
 }
 
-
 fun Path.drawHorizontalProgressPath(left: Float, top: Float, right: Float, bottom: Float, radius: Float,progress: Float) {
     reset()
     moveTo(left, top)
@@ -189,4 +176,18 @@ fun Path.drawVerticalProgressPath(left: Float, top: Float, right: Float, bottom:
     close()
 }
 
-
+data class PopSeekBarDrawable(
+    val trackGradientType: Int? = null,
+    val trackGradientAngle: Int? = null,
+    val trackRadius: Float? = null,
+    val trackSolidColor: Int? = null,
+    val trackStartColor: Int? = null,
+    val trackEndColor: Int? = null,
+    val progressGradientType: Int? = null,
+    val progressGradientAngle: Int? = null,
+    val progressRadius: Float? = null,
+    val progressSolidColor: Int? = null,
+    val progressStartColor: Int? = null,
+    val progressEndColor: Int? = null,
+    val commonRadius: Float? = null
+)

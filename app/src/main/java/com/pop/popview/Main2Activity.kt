@@ -1,12 +1,8 @@
 package com.pop.popview
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import com.pop.popview.databinding.ActivityMain2Binding
 import com.pop.seekbar.PopSeekBar
 
@@ -23,14 +19,29 @@ class Main2Activity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         supportActionBar?.hide()
-        binding.seekbar.apply {
+/*        binding.seekbarTop.apply {
+
+        }*/
+        binding.seekbarBottom.apply {
             max = 50
             stretchStep = 150
             maxStretchDistance =70
 //            canResponseTouch = true
         }
 
-        binding.seekbar.setOnSeekBarChangeListener(object : PopSeekBar.OnPopSeekBarChangeListener{
+        binding.red.setOnClickListener {
+            binding.seekbarTop.modifyDrawable(trackStartColor = android.graphics.Color.RED)
+        }
+
+        binding.green.setOnClickListener {
+            binding.seekbarTop.modifyDrawable(trackStartColor = android.graphics.Color.GREEN)
+        }
+
+        binding.blue.setOnClickListener {
+            binding.seekbarTop.modifyDrawable(trackStartColor = android.graphics.Color.BLUE)
+        }
+
+        binding.seekbarBottom.setOnSeekBarChangeListener(object : PopSeekBar.OnPopSeekBarChangeListener{
             override fun onStartTrackingTouch(seekBar: PopSeekBar, mProgress: Int) {
             }
 
@@ -38,6 +49,7 @@ class Main2Activity : AppCompatActivity() {
             }
 
             override fun onProgressChanged(seekBar: PopSeekBar, mProgress: Int, fromUser: Boolean) {
+//                binding.seekbarTop.modifyDrawable(PopSeekBarDrawable(trackSolidColor = android.graphics.Color.GREEN))
             }
         })
 
